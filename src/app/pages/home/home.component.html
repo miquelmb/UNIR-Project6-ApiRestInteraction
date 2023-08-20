@@ -1,0 +1,7 @@
+<section class="container">
+  <div class="d-flex flex-wrap justify-content-center">
+    <article *ngFor="let user of arrUsers">
+      <app-user-card [oneUser]="user"></app-user-card>
+    </article>
+  </div>
+</section>
