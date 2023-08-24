@@ -10,6 +10,12 @@
         placeholder="Introduce un nombre de usuario"
         formControlName="first_name"
       />
+      <p class="error mt-1" *ngIf="checkControl('first_name', 'required')">
+        Campo requerido
+      </p>
+      <p class="error mt-1" *ngIf="checkControl('first_name', 'minlength')">
+        La longitud mínima es de 2 carácteres
+      </p>
     </div>
     <div class="mb-3">
       <label for="last_name" class="form-label">Apellidos</label>
@@ -20,6 +26,12 @@
         placeholder="Introduce un nombre de usuario"
         formControlName="last_name"
       />
+      <p class="error mt-1" *ngIf="checkControl('last_name', 'required')">
+        Campo requerido
+      </p>
+      <p class="error mt-1" *ngIf="checkControl('last_name', 'minlength')">
+        La longitud mínima es de 2 carácteres
+      </p>
     </div>
     <div class="mb-3">
       <label for="email" class="form-label">Email</label>
@@ -30,6 +42,12 @@
         placeholder="Introduce un nombre de usuario"
         formControlName="email"
       />
+      <p class="error mt-1" *ngIf="checkControl('email', 'required')">
+        Campo requerido
+      </p>
+      <p class="error mt-1" *ngIf="checkControl('email', 'pattern')">
+        El email introducido no es válido
+      </p>
     </div>
     <div class="mb-3">
       <label for="image" class="form-label">Imagen de usuario</label>
@@ -40,9 +58,20 @@
         placeholder="Introduce un nombre de usuario"
         formControlName="image"
       />
+      <p class="error mt-1" *ngIf="checkControl('image', 'required')">
+        Campo requerido
+      </p>
+      <p class="error mt-1" *ngIf="checkControl('image', 'pattern')">
+        La URL introducida no es válida
+      </p>
     </div>
 
-    <input type="submit" class="btn btn-danger mt-3" [value]="buttonText" />
+    <input
+      type="submit"
+      class="btn btn-danger mt-3"
+      [value]="buttonText"
+      [disabled]="!userForm.valid"
+    />
   </form>
 </section>
 

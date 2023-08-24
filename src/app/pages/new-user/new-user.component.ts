@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsersService } from 'src/app/services/users.service';
 
@@ -11,6 +11,9 @@ import { UsersService } from 'src/app/services/users.service';
 export class NewUserComponent {
   formTitle: string = 'NUEVO USUARIO';
   buttonText: string = 'Guardar';
+  mailRegEx = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  urlRegEx =
+    /^(http(s)?|ftp):\/\/[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/;
 
   userForm: FormGroup;
 
@@ -21,10 +24,22 @@ export class NewUserComponent {
   constructor() {
     this.userForm = new FormGroup(
       {
-        first_name: new FormControl('', []),
-        last_name: new FormControl('', []),
-        email: new FormControl('', []),
-        image: new FormControl('', []),
+        first_name: new FormControl('', [
+          Validators.required,
+          Validators.minLength(2),
+        ]),
+        last_name: new FormControl('', [
+          Validators.required,
+          Validators.minLength(2),
+        ]),
+        email: new FormControl('', [
+          Validators.required,
+          Validators.pattern(this.mailRegEx),
+        ]),
+        image: new FormControl('', [
+          Validators.required,
+          Validators.pattern(this.urlRegEx),
+        ]),
       },
       []
     );
@@ -41,10 +56,22 @@ export class NewUserComponent {
         this.userForm = new FormGroup(
           {
             _id: new FormControl(response._id, []),
-            first_name: new FormControl(response.first_name, []),
-            last_name: new FormControl(response.last_name, []),
-            email: new FormControl(response.email, []),
-            image: new FormControl(response.image, []),
+            first_name: new FormControl(response.first_name, [
+              Validators.required,
+              Validators.minLength(2),
+            ]),
+            last_name: new FormControl(response.last_name, [
+              Validators.required,
+              Validators.minLength(2),
+            ]),
+            email: new FormControl(response.email, [
+              Validators.required,
+              Validators.pattern(this.mailRegEx),
+            ]),
+            image: new FormControl(response.image, [
+              Validators.required,
+              Validators.pattern(this.urlRegEx),
+            ]),
           },
           []
         );
@@ -70,5 +97,15 @@ export class NewUserComponent {
         alert('Error al añadir usuario/a');
       }
     }
+  }
+
+  checkControl(
+    formControlName: string,
+    validator: string
+  ): boolean | undefined {
+    return (
+      this.userForm.get(formControlName)?.hasError(validator) &&
+      this.userForm.get(formControlName)?.touched
+    );
   }
 }
