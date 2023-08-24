@@ -5,7 +5,7 @@
   <div class="m-auto">
     <div>
       <img
-        [src]="unUsuario?.image"
+        [src]="oneUser?.image"
         class="img-fluid rounded-circle p-5 w-100"
         alt="..."
       />
@@ -13,26 +13,26 @@
   </div>
   <div class="col-md-6 m-auto py-3 border-start border-success">
     <div class="card-body">
-      <h4 class="card-title">{{ unUsuario?.first_name }}</h4>
-      <h5 class="card-title">{{ unUsuario?.last_name }}</h5>
+      <h4 class="card-title">{{ oneUser?.first_name }}</h4>
+      <h5 class="card-title">{{ oneUser?.last_name }}</h5>
       <p class="text-body-secondary">
-        <span class="fw-bold">Usuario: </span>{{ unUsuario?.username }}
+        <span class="fw-bold">Usuario: </span>{{ oneUser?.username }}
       </p>
       <p class="text-body-secondary">
-        <span class="fw-bold">Email: </span>{{ unUsuario?.email }}
+        <span class="fw-bold">Email: </span>{{ oneUser?.email }}
       </p>
       <div class="btn-group" role="group" aria-label="Basic outlined example">
         <button
           type="button"
           class="btn btn-outline-dark"
-          (click)="deleteUser(unUsuario._id)"
+          (click)="deleteUser(oneUser._id)"
         >
           Eliminar
         </button>
         <button
           type="button"
           class="btn btn-outline-dark"
-          [routerLink]="['/updateuser', unUsuario?._id]"
+          [routerLink]="['/updateuser', oneUser?._id]"
         >
           Actualizar
         </button>

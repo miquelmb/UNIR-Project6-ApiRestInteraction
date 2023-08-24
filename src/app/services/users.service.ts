@@ -1,5 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+
 import { lastValueFrom } from 'rxjs';
 import { GetApi } from '../interfaces/get-api.interface';
 import { Usuario } from '../interfaces/usuario.interface';
@@ -17,15 +18,30 @@ export class UsersService {
     return lastValueFrom(this.httpClient.get<GetApi>(this.apiMainUrl));
   }
 
-  getByAlfaId(id: string): Promise<Usuario> {
+  getByAlfaId(_id: string): Promise<Usuario> {
     return lastValueFrom(
-      this.httpClient.get<Usuario>(`${this.apiMainUrl}${id}`)
+      this.httpClient.get<Usuario>(`${this.apiMainUrl}${_id}`)
     );
   }
 
-  delete(id: string): Promise<any> {
+  delete(_id: string): Promise<any> {
     return lastValueFrom(
-      this.httpClient.delete<any>(`${this.apiMainUrl}${id}`)
+      this.httpClient.delete<any>(`${this.apiMainUrl}${_id}`)
+    );
+  }
+
+  update(formValue: Usuario): Promise<Usuario> {
+    return lastValueFrom(
+      this.httpClient.put<Usuario>(
+        `${this.apiMainUrl}${formValue._id}`,
+        formValue
+      )
+    );
+  }
+
+  insert(formValue: Usuario): Promise<Usuario> {
+    return lastValueFrom(
+      this.httpClient.post<Usuario>(this.apiMainUrl, formValue)
     );
   }
 }

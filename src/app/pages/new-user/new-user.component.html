@@ -1,6 +1,6 @@
 <section class="container">
-  <h3 class="my-5">NUEVO USUARIO</h3>
-  <form class="mb-3">
+  <h3 class="my-5">{{ formTitle }}</h3>
+  <form [formGroup]="userForm" (ngSubmit)="getUserDataForm()" class="mb-3">
     <div class="mb-3">
       <label for="first_name" class="form-label">Nombre</label>
       <input
@@ -32,17 +32,17 @@
       />
     </div>
     <div class="mb-3">
-      <label for="email" class="form-label">Imagen usuario</label>
+      <label for="image" class="form-label">Imagen de usuario</label>
       <input
         type="text"
-        id="email"
+        id="image"
         class="form-control"
         placeholder="Introduce un nombre de usuario"
-        formControlName="email"
+        formControlName="image"
       />
     </div>
 
-    <input type="submit" class="btn btn-danger mt-3" value="Guardar" />
+    <input type="submit" class="btn btn-danger mt-3" [value]="buttonText" />
   </form>
 </section>
 

@@ -11,13 +11,13 @@ import { UsersService } from 'src/app/services/users.service';
 export class ViewUserComponent {
   activatedRoute = inject(ActivatedRoute);
   usersService = inject(UsersService);
-  unUsuario!: Usuario | any;
+  oneUser!: Usuario | any;
   router = inject(Router);
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(async (params: any) => {
       let _id: string = params.iduser;
-      this.unUsuario = await this.usersService.getByAlfaId(_id);
+      this.oneUser = await this.usersService.getByAlfaId(_id);
     });
   }
 

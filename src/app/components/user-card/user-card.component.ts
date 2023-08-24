@@ -17,10 +17,10 @@ export class UserCardComponent {
     if (confirm('Vas a borrar este usuario/a. Estás seguro/a?') === true) {
       try {
         const response = await this.usersService.delete(user);
-
         if (response.error) {
           alert('Error: ' + '' + response.error);
         } else {
+          alert('Usuario/a eliminado/a correctamente');
           this.router.navigate(['/home']);
         }
       } catch (error) {
