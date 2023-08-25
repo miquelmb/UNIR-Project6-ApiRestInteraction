@@ -48,6 +48,9 @@
       <p class="error mt-1" *ngIf="checkControl('email', 'pattern')">
         El email introducido no es válido
       </p>
+      <p class="error mt-1" *ngIf="checkControl('email', 'emailvalidacion')">
+        {{ userForm.get('email')?.errors?.['emailvalidacion']}}
+      </p>
     </div>
     <div class="mb-3">
       <label for="image" class="form-label">Imagen de usuario</label>

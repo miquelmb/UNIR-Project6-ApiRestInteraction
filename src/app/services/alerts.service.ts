@@ -29,8 +29,8 @@ export class AlertsService {
     });
   }
 
-  async showSuccess(message: string): Promise<void> {
-    await Swal.fire({
+  showSuccess(message: string): void {
+    Swal.fire({
       text: message,
       icon: 'success',
       confirmButtonText: 'Aceptar',
