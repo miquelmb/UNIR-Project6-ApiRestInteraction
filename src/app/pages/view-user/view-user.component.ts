@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Usuario } from 'src/app/interfaces/usuario.interface';
+import { AlertsService } from 'src/app/services/alerts.service';
 import { UsersService } from 'src/app/services/users.service';
 
 @Component({
@@ -11,6 +12,7 @@ import { UsersService } from 'src/app/services/users.service';
 export class ViewUserComponent {
   activatedRoute = inject(ActivatedRoute);
   usersService = inject(UsersService);
+  alertsService = inject(AlertsService);
   oneUser!: Usuario | any;
   router = inject(Router);
 
@@ -22,9 +24,20 @@ export class ViewUserComponent {
   }
 
   async deleteUser(user: string) {
-    if (confirm('Vas a borrar este usuario/a. Estás seguro/a?') === true) {
-      let response = await this.usersService.delete(user);
-      this.router.navigate(['/home']);
+    const confirmed = await this.alertsService.showDeleteConfirm();
+    if (!confirmed) {
+      return;
+    }
+    try {
+      const response = await this.usersService.delete(user);
+      if (response.error) {
+        this.alertsService.showError('Error', response.error);
+      } else {
+        this.alertsService.showSuccess('Usuario eliminado correctamente!');
+        this.router.navigate(['/home']);
+      }
+    } catch (error) {
+      console.error('An error occurred:', error);
     }
   }
 }
