@@ -1,6 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+
+import { AlertsService } from 'src/app/services/alerts.service';
 import { UsersService } from 'src/app/services/users.service';
 
 @Component({
@@ -19,6 +21,7 @@ export class NewUserComponent {
 
   activatedRoute = inject(ActivatedRoute);
   usersService = inject(UsersService);
+  alertsService = inject(AlertsService);
   router = inject(Router);
 
   constructor() {
@@ -83,18 +86,24 @@ export class NewUserComponent {
     if (this.userForm.value._id) {
       let response = await this.usersService.update(this.userForm.value);
       if (response.id) {
-        alert('Usuario/a actualizado/a correctamente');
+        this.alertsService.showSuccess('Usuario/a actualizado/a correctamente');
         this.router.navigate(['/home']);
       } else {
-        alert(`El usuario no ha podido ser actualizado. ${response.error}`);
+        this.alertsService.showError(
+          'El usuario no ha podido ser actualizado',
+          `${response.error}`
+        );
       }
     } else {
       let response = await this.usersService.insert(this.userForm.value);
       if (response.id) {
-        alert('Usuario/a añadido/a correctamente');
+        this.alertsService.showSuccess('Usuario/a añadido/a correctamente');
         this.router.navigate(['/home']);
       } else {
-        alert('Error al añadir usuario/a');
+        this.alertsService.showError(
+          'El usuario no ha podido ser actualizado',
+          `${response.error}`
+        );
       }
     }
   }
