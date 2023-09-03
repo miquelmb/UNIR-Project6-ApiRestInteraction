@@ -1,3 +1,52 @@
+<!-- <section class="container mt-3">
+  <nav>
+    <ul class="pagination justify-content-center">
+      <li class="page-item cursor">
+        <a class="page-link custom-font-color" (click)="changePage(1)"
+          >&laquo;</a
+        >
+      </li>
+      <li class="page-item cursor" [class.active]="currentPage === 1">
+        <a class="page-link custom-font-color" (click)="changePage(1)">1</a>
+      </li>
+      <li class="page-item cursor" [class.active]="currentPage === 2">
+        <a class="page-link custom-font-color" (click)="changePage(2)">2</a>
+      </li>
+      <li class="page-item cursor">
+        <a class="page-link custom-font-color" (click)="changePage(2)"
+          >&raquo;</a
+        >
+      </li>
+    </ul>
+  </nav>
+</section> -->
+
+<section class="container mt-3">
+  <nav>
+    <ul class="pagination justify-content-center">
+      <li class="page-item cursor">
+        <a class="page-link custom-font-color" (click)="addOrSubstractPage('-')"
+          >&laquo;</a
+        >
+      </li>
+
+      <div class="ngFor" *ngFor="let page of arrayOfPages">
+        <li class="page-item cursor" [class.active]="currentPage === page">
+          <a class="page-link custom-font-color" (click)="changePage(page)">{{
+            page
+          }}</a>
+        </li>
+      </div>
+
+      <li class="page-item cursor">
+        <a class="page-link custom-font-color" (click)="addOrSubstractPage('+')"
+          >&raquo;</a
+        >
+      </li>
+    </ul>
+  </nav>
+</section>
+
 <section class="container">
   <div class="d-flex flex-wrap justify-content-center">
     <article *ngFor="let user of arrUsers">

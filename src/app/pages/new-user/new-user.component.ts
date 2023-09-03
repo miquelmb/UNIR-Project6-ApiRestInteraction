@@ -61,7 +61,7 @@ export class NewUserComponent {
 
   ngOnInit(): void {
     // Obtener datos de los usuarios y asignar a arrUsers para hacer validación de email ya existente.
-    this.usersService.getAll().then((response) => {
+    this.usersService.getAll(1).then((response) => {
       this.arrUsers = response.results;
     });
 
