@@ -27,7 +27,7 @@ export class NewUserComponent {
   userForm: FormGroup;
 
   getApiInfo!: GetApi;
-  arrUsers!: Usuario[];
+  arrUsers: Usuario[] = [];
 
   activatedRoute = inject(ActivatedRoute);
   usersService = inject(UsersService);
@@ -60,10 +60,22 @@ export class NewUserComponent {
   }
 
   ngOnInit(): void {
-    // Obtener datos de los usuarios y asignar a arrUsers para hacer validación de email ya existente.
-    this.usersService.getAll(1).then((response) => {
-      this.arrUsers = response.results;
-    });
+    // Obtener datos de los usuarios y asignar a arrUsers para hacer validación de email ya existente
+    // NOTA/COMENTARIO sobre entrega
+    // Al saber que son 15 el total de usuarios de esta fake api lo he propuesto así, ya que hecho algunos intentos sin exito de acceder a los 15 usuarios por página con la direccion: https://peticiones.online/api/users?page=1&per_page=15, de crear un bucle for que hiciera llamadas a getAll(i) mientras que el response.results no fuera un array vacío, etc... Al final, lo he dejado así por falta de tiempo, útil para esta práctica pero no útil para un caso real en el que sí que el nombre de usuarios y páginas podría incrementar o disminuir...
+
+    this.usersService
+      .getAll(1)
+      .then((response) => {
+        this.arrUsers = this.arrUsers.concat(response.results);
+        return this.usersService.getAll(2);
+      })
+      .then((response) => {
+        this.arrUsers = this.arrUsers.concat(response.results);
+      })
+      .catch((error) => {
+        console.error('An error occurred:', error);
+      });
 
     this.activatedRoute.params.subscribe(async (params: any) => {
       let _id: string = params.iduser;
@@ -138,10 +150,9 @@ export class NewUserComponent {
   emailValidacion = (formValue: AbstractControl): any => {
     const email = formValue.value;
 
-    // If para que no busque en el servicio hasta que el formato de email sea el correcto.
+    // If para que no haga comprobaciones con arrUsers hasta que el formato de email sea correcto.
     if (this.mailRegEx.test(email)) {
       const emailExists = this.arrUsers.some((user) => user.email === email);
-
       if (emailExists) {
         return {
           emailvalidacion: `Este email ya existe en nuestra base de datos`,
