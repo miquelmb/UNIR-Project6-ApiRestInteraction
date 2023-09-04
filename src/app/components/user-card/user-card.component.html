@@ -1,11 +1,11 @@
 <div
-  class="card shadow d-flex align-items-center m-3"
+  class="card shadow d-flex align-items-center mt-3"
   style="width: 19rem; height: 28rem"
 >
   <img
     [src]="oneUser.image"
     alt="User image"
-    class="rounded-circle w-75 p-3"
+    class="rounded-circle w-75 pt-4"
     alt="..."
   />
   <div class="card-body">
@@ -32,7 +32,7 @@
             d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"
           />
         </svg>
-        <span class="fs-6 fw-light">Ver detalle</span>
+        <span class="fw-light">Ver detalle</span>
       </a>
       <div>
         <a class="btn" [routerLink]="['/updateuser', oneUser?._id]">
@@ -51,7 +51,7 @@
               d="M2 13c0 1 1 1 1 1h5.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.544-3.393C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4Z"
             />
           </svg>
-          <span class="fs-6 fw-light">Actualizar</span>
+          <span class="fw-light">Actualizar</span>
         </a>
       </div>
       <div (click)="deleteUser(oneUser._id)">
@@ -72,7 +72,7 @@
             />
           </svg>
 
-          <span class="fs-6 fw-light">Borrar</span>
+          <span class="fw-light">Borrar</span>
         </a>
       </div>
     </div>

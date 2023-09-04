@@ -1,31 +1,8 @@
-<!-- <section class="container mt-3">
+<section class="mt-3">
   <nav>
     <ul class="pagination justify-content-center">
       <li class="page-item cursor">
-        <a class="page-link custom-font-color" (click)="changePage(1)"
-          >&laquo;</a
-        >
-      </li>
-      <li class="page-item cursor" [class.active]="currentPage === 1">
-        <a class="page-link custom-font-color" (click)="changePage(1)">1</a>
-      </li>
-      <li class="page-item cursor" [class.active]="currentPage === 2">
-        <a class="page-link custom-font-color" (click)="changePage(2)">2</a>
-      </li>
-      <li class="page-item cursor">
-        <a class="page-link custom-font-color" (click)="changePage(2)"
-          >&raquo;</a
-        >
-      </li>
-    </ul>
-  </nav>
-</section> -->
-
-<section class="container mt-3">
-  <nav>
-    <ul class="pagination justify-content-center">
-      <li class="page-item cursor">
-        <a class="page-link custom-font-color" (click)="addOrSubstractPage('-')"
+        <a class="page-link custom-font-color" (click)="addOrSubtractPage('-')"
           >&laquo;</a
         >
       </li>
@@ -39,7 +16,7 @@
       </div>
 
       <li class="page-item cursor">
-        <a class="page-link custom-font-color" (click)="addOrSubstractPage('+')"
+        <a class="page-link custom-font-color" (click)="addOrSubtractPage('+')"
           >&raquo;</a
         >
       </li>

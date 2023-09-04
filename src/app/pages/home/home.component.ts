@@ -26,14 +26,32 @@ export class HomeComponent {
     };
   }
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit(): void {
+    this.fetchData(this.currentPage);
+  }
+
+  // async ngOnInit(): Promise<void> {
+  //   try {
+  //     this.getApiInfo = await this.usersService.getAll(this.currentPage);
+  //     this.arrUsers = this.getApiInfo.results;
+  //     this.lastPage = this.getApiInfo.total_pages;
+  //     this.arrayOfPagesMaker(this.lastPage);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
+
+  async fetchData(page: number): Promise<void> {
     try {
-      this.getApiInfo = await this.usersService.getAll(this.currentPage);
+      this.getApiInfo = await this.usersService.getAll(page);
       this.arrUsers = this.getApiInfo.results;
       this.lastPage = this.getApiInfo.total_pages;
-      this.arrayOfPagesMaker(this.lastPage);
+      if (this.arrayOfPages.length === 0) {
+        this.arrayOfPagesMaker(this.lastPage);
+      }
     } catch (error) {
       console.log(error);
+      // Handle errors here (e.g., display an error message to the user)
     }
   }
 
@@ -43,34 +61,50 @@ export class HomeComponent {
     }
   }
 
+  // async changePage(page: number): Promise<void> {
+  //   try {
+  //     this.getApiInfo = await this.usersService.getAll(page);
+  //     this.arrUsers = this.getApiInfo.results;
+  //     this.currentPage = page;
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
+
   async changePage(page: number): Promise<void> {
-    try {
-      this.getApiInfo = await this.usersService.getAll(page);
-      this.arrUsers = this.getApiInfo.results;
-      this.currentPage = page;
-    } catch (error) {
-      console.log(error);
-    }
+    this.currentPage = page;
+    await this.fetchData(page);
   }
 
-  async addOrSubstractPage(page: string): Promise<void> {
+  // async addOrSubstractPage(page: string): Promise<void> {
+  //   if (page === '+' && this.currentPage < this.arrayOfPages.length) {
+  //     try {
+  //       this.getApiInfo = await this.usersService.getAll(this.currentPage + 1);
+  //       this.arrUsers = this.getApiInfo.results;
+  //       this.currentPage++;
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   }
+  //   if (page === '-' && this.currentPage > this.arrayOfPages[0]) {
+  //     try {
+  //       this.getApiInfo = await this.usersService.getAll(this.currentPage - 1);
+  //       this.arrUsers = this.getApiInfo.results;
+  //       this.currentPage--;
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   }
+  // }
+
+  async addOrSubtractPage(page: string): Promise<void> {
     if (page === '+' && this.currentPage < this.arrayOfPages.length) {
-      try {
-        this.getApiInfo = await this.usersService.getAll(this.currentPage + 1);
-        this.arrUsers = this.getApiInfo.results;
-        this.currentPage++;
-      } catch (error) {
-        console.log(error);
-      }
+      await this.fetchData(this.currentPage + 1);
+      this.currentPage++;
     }
     if (page === '-' && this.currentPage > this.arrayOfPages[0]) {
-      try {
-        this.getApiInfo = await this.usersService.getAll(this.currentPage - 1);
-        this.arrUsers = this.getApiInfo.results;
-        this.currentPage--;
-      } catch (error) {
-        console.log(error);
-      }
+      await this.fetchData(this.currentPage - 1);
+      this.currentPage--;
     }
   }
 }
