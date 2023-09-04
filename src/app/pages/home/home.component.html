@@ -48,8 +48,11 @@
 </section>
 
 <section class="container">
-  <div class="d-flex flex-wrap justify-content-center">
-    <article *ngFor="let user of arrUsers">
+  <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3">
+    <article
+      *ngFor="let user of arrUsers"
+      class="col d-flex justify-content-center"
+    >
       <app-user-card [oneUser]="user"></app-user-card>
     </article>
   </div>
