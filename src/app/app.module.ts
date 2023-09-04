@@ -11,7 +11,6 @@ import { C404Component } from './pages/c404/c404.component';
 import { NewUserComponent } from './pages/new-user/new-user.component';
 import { UserCardComponent } from './components/user-card/user-card.component';
 import { ViewUserComponent } from './pages/view-user/view-user.component';
-import { PaginationComponent } from './components/pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +21,6 @@ import { PaginationComponent } from './components/pagination/pagination.componen
     NewUserComponent,
     UserCardComponent,
     ViewUserComponent,
-    PaginationComponent,
   ],
   imports: [
     BrowserModule,

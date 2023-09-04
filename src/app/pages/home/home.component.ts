@@ -28,7 +28,7 @@ export class HomeComponent {
 
   async ngOnInit(): Promise<void> {
     try {
-      this.getApiInfo = await this.usersService.getAll(1);
+      this.getApiInfo = await this.usersService.getAll(this.currentPage);
       this.arrUsers = this.getApiInfo.results;
       this.lastPage = this.getApiInfo.total_pages;
       this.arrayOfPagesMaker(this.lastPage);
