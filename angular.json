@@ -13,6 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": ["sweetalert2"],
             "outputPath": "dist/consultas-api-externa",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -30,7 +31,7 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
+                  "maximumWarning": "700kb",
                   "maximumError": "1mb"
                 },
                 {
@@ -43,7 +44,13 @@
             },
             "development": {
               "buildOptimizer": false,
-              "optimization": false,
+              "optimization": {
+                "scripts": true,
+                "styles": {
+                  "minify": true,
+                  "inlineCritical": true
+                }
+              },
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
